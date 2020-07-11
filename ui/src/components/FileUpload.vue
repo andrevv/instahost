@@ -3,9 +3,8 @@
     <h1>Upload File</h1>
     <form>
       <div class="form-group">
-        <input type="text" class="form-control">
+        <input type="file" class="form-control" ref="fileUpload" @change="change">
       </div>
-      <button class="btn btn-primary" @click.prevent="submit">Submit</button>
     </form>
   </div>
 </template>
@@ -14,12 +13,18 @@
 export default {
   name: 'FileUpload',
   methods: {
-    submit () {
+    change (e) {
+      const formData = new FormData()
+      formData.append('file', e.target.files[0])
+
       fetch('http://localhost:8081/api/files', {
         method: 'POST',
-        mode: 'no-cors'
+        mode: 'no-cors',
+        body: formData
       })
-        .then(respone => console.log(respone))
+        .then(() => {
+          this.$refs.fileUpload.value = null
+        })
     }
   }
 }
