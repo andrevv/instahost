@@ -49,6 +49,7 @@ class FileUploadControllerTest {
 
         // then
         assertThat(response.getStatus(), is(HttpStatus.CREATED.value()));
+        verify(idGenerator, times(1)).generate();
         verify(fileStorage, times(1)).store(id, data);
     }
 }
