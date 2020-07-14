@@ -1,9 +1,12 @@
 package com.instahost.api.service;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Random;
 
 import static java.util.stream.Collectors.joining;
 
+@Service
 public class IdGeneratorImpl implements IdGenerator {
 
     private static final char[] alphabet = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'  };
