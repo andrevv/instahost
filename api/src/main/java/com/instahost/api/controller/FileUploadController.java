@@ -1,5 +1,6 @@
 package com.instahost.api.controller;
 
+import com.instahost.api.service.FileStorage;
 import com.instahost.api.service.IdGenerator;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -11,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileOutputStream;
-
 @RestController
 @RequestMapping("/api/files")
 @Slf4j
 public class FileUploadController {
 
     private final IdGenerator idGenerator;
+    private final FileStorage storage;
 
-    public FileUploadController(IdGenerator idGenerator) {
+    public FileUploadController(IdGenerator idGenerator, FileStorage storage) {
         this.idGenerator = idGenerator;
+        this.storage = storage;
     }
 
     @SneakyThrows
@@ -29,13 +30,7 @@ public class FileUploadController {
     public ResponseEntity upload(@RequestParam("file") MultipartFile file) {
         log.info("Got an upload request.");
 
-        var bytes = file.getBytes();
-
-        var id = idGenerator.generate();
-
-        var f = new FileOutputStream(id);
-        f.write(bytes);
-        f.close();
+        storage.store(idGenerator.generate(), file.getBytes());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
