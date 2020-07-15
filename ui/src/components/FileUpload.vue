@@ -5,6 +5,7 @@
       <div class="form-group">
         <input type="file" class="form-control" ref="fileUpload" @change="change">
       </div>
+      <h1>{{id}}</h1>
     </form>
   </div>
 </template>
@@ -12,6 +13,11 @@
 <script>
 export default {
   name: 'FileUpload',
+  data () {
+    return {
+      id: null
+    }
+  },
   methods: {
     change (e) {
       const formData = new FormData()
@@ -19,11 +25,12 @@ export default {
 
       fetch('http://localhost:8081/api/files', {
         method: 'POST',
-        mode: 'no-cors',
         body: formData
       })
-        .then(() => {
+        .then(res => res.json())
+        .then(data => {
           this.$refs.fileUpload.value = null
+          this.id = data.id
         })
     }
   }
