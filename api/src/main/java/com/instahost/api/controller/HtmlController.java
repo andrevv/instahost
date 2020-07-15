@@ -14,7 +14,7 @@ public class HtmlController {
     @SneakyThrows
     @GetMapping(value = "/{id}", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String get(@PathVariable String id) {
+    public String getHtml(@PathVariable String id) {
         return id;
     }
 }
