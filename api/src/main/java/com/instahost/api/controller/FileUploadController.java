@@ -36,8 +36,6 @@ public class FileUploadController {
 
         var response = new UploadFileResult(id);
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(response);
+        return ResponseEntity.ok(response);
     }
 }

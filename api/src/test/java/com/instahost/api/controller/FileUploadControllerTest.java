@@ -59,7 +59,7 @@ class FileUploadControllerTest {
                 .getResponse();
 
         // then
-        assertThat(response.getStatus(), is(HttpStatus.CREATED.value()));
+        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getContentAsString(), is(jsonResult.write(new UploadFileResult(id)).getJson()));
         verify(idGenerator, times(1)).generate();
         verify(fileStorage, times(1)).store(id, data);
