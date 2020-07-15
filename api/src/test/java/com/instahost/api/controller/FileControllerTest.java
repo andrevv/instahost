@@ -23,8 +23,8 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-@WebMvcTest(FileUploadController.class)
-class FileUploadControllerTest {
+@WebMvcTest(FileController.class)
+class FileControllerTest {
 
     @Autowired
     private MockMvc mvc;

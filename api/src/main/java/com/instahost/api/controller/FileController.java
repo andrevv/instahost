@@ -16,12 +16,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api/files")
 @Slf4j
-public class FileUploadController {
+public class FileController {
 
     private final IdGenerator idGenerator;
     private final FileStorage storage;
 
-    public FileUploadController(IdGenerator idGenerator, FileStorage storage) {
+    public FileController(IdGenerator idGenerator, FileStorage storage) {
         this.idGenerator = idGenerator;
         this.storage = storage;
     }
