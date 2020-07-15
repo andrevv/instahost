@@ -1,5 +1,6 @@
 package com.instahost.api.controller;
 
+import com.instahost.api.dto.UploadFileResult;
 import com.instahost.api.service.FileStorage;
 import com.instahost.api.service.IdGenerator;
 import lombok.SneakyThrows;
@@ -27,13 +28,16 @@ public class FileUploadController {
 
     @SneakyThrows
     @PostMapping
-    public ResponseEntity upload(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<UploadFileResult> upload(@RequestParam("file") MultipartFile file) {
         log.info("Got an upload request.");
 
-        storage.store(idGenerator.generate(), file.getBytes());
+        var id = idGenerator.generate();
+        storage.store(id, file.getBytes());
+
+        var response = new UploadFileResult(id);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .build();
+                .body(response);
     }
 }
