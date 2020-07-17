@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 @Controller
 @RequestMapping("/")
 public class HtmlController {
@@ -25,8 +23,6 @@ public class HtmlController {
     @GetMapping(value = "/{id}", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String getHtml(@PathVariable String id) {
-        var file = fileStorage.retrieve(id);
-
-        return new String(file, UTF_8);
+        return fileStorage.retrieve(id);
     }
 }

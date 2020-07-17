@@ -31,7 +31,7 @@ class HtmlControllerTest {
         // given
         final String id = "12345abc";
         final String file = "file data";
-        given(fileStorage.retrieve(id)).willReturn(file.getBytes());
+        given(fileStorage.retrieve(id)).willReturn(file);
 
         // when
         mvc.perform(get("/" + id))
