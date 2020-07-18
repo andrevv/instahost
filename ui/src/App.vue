@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <FileUpload />
+    <router-view :key="$route.path" />
   </div>
 </template>
 
 <script>
-import FileUpload from '@/components/FileUpload'
-
 export default {
-  name: 'App',
-  components: {
-    FileUpload
-  }
+  name: 'App'
 }
 </script>
 
