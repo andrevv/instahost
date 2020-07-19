@@ -31,6 +31,7 @@ export default {
         .then(data => {
           this.$refs.fileUpload.value = null
           this.id = data.id
+          this.$router.push({ name: 'Upload', params: { id: data.id } })
         })
     }
   }
