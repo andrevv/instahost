@@ -8,6 +8,12 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import(/* webpackChunkName: "home" */ '@/views/Home')
+  },
+  {
+    path: '/upload/:id',
+    name: 'Upload',
+    props: true,
+    component: () => import(/* webpackChunkName: "upload" */ '@/views/Upload')
   }
 ]
 
