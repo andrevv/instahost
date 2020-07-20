@@ -17,7 +17,7 @@ export default {
     }
   },
   created () {
-    fetch('http://localhost:8081/api/files/' + this.id, {
+    fetch(process.env.VUE_APP_API_BASE_URL + '/api/files/' + this.id, {
       headers: {
         Accept: 'text/html'
       }

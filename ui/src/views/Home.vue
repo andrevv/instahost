@@ -23,7 +23,7 @@ export default {
       const formData = new FormData()
       formData.append('file', e.target.files[0])
 
-      fetch('http://localhost:8081/api/files', {
+      fetch(process.env.VUE_APP_API_BASE_URL + '/api/files', {
         method: 'POST',
         body: formData
       })
