@@ -17,7 +17,7 @@ export default {
     }
   },
   created () {
-    fetch('http://localhost:8081/' + this.id, {
+    fetch('http://localhost:8081/api/files/' + this.id, {
       headers: {
         Accept: 'text/html'
       }
