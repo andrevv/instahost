@@ -18,15 +18,19 @@ public class FileController {
 
     private final IdGenerator idGenerator;
     private final FileStorage storage;
-    private final StaticFileRepository fileRepository;
 
     public FileController(
             IdGenerator idGenerator,
-            FileStorage storage,
-            StaticFileRepository fileRepository) {
+            FileStorage storage) {
         this.idGenerator = idGenerator;
         this.storage = storage;
-        this.fileRepository = fileRepository;
+    }
+
+    @SneakyThrows
+    @ResponseBody
+    @GetMapping(value = "/{id}")
+    public String download(@PathVariable String id) {
+        return storage.retrieve(id);
     }
 
     @SneakyThrows
@@ -36,9 +40,6 @@ public class FileController {
 
         var id = idGenerator.generate();
         storage.store(id, file.getBytes());
-
-        var staticFile = new StaticFile(id, file.getBytes());
-        fileRepository.save(staticFile);
 
         var response = new UploadFileResult(id);
 

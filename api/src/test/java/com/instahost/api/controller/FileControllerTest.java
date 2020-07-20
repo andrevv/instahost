@@ -20,8 +20,11 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(FileController.class)
 class FileControllerTest {
@@ -40,6 +43,24 @@ class FileControllerTest {
     @BeforeEach
     void beforeEach() {
         JacksonTester.initFields(this, new ObjectMapper());
+    }
+
+    @SneakyThrows
+    @Test
+    void getFile() {
+        // given
+        final String id = "12345abc";
+        final String file = "file data";
+        given(fileStorage.retrieve(id)).willReturn(file);
+
+        // when
+        mvc.perform(get("/api/files/" + id))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(file));
+
+        // then
+        verify(fileStorage, times(1)).retrieve(id);
     }
 
     @SneakyThrows
