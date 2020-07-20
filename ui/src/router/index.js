@@ -14,12 +14,6 @@ const routes = [
     name: 'Hosted',
     props: true,
     component: () => import(/* webpackChunkName: "hosted" */ '@/views/Hosted')
-  },
-  {
-    path: '/upload/:id',
-    name: 'Upload',
-    props: true,
-    component: () => import(/* webpackChunkName: "upload" */ '@/views/Upload')
   }
 ]
 
